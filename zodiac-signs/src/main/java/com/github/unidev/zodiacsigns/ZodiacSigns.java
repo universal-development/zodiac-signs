@@ -1,87 +1,88 @@
 package com.github.unidev.zodiacsigns;
 
-import java.time.LocalDate;
-import java.util.function.Predicate;
+import java.time.MonthDay;
+import java.util.Optional;
 
 /**
  * Zodiac signs enum.
  */
 public enum ZodiacSigns {
     Capricorn(
-        date -> (date.getMonthValue() == 12 && date.getDayOfMonth() >= 22
-            && date.getDayOfMonth() <= 31),
-        date -> (date.getMonthValue() == 1 && date.getDayOfMonth() >= 1
-            && date.getDayOfMonth() <= 19)
-    ),
+        new Pair(MonthDay.of(12, 22), MonthDay.of(12, 31)),
+        new Pair(MonthDay.of(1, 1), MonthDay.of(1, 19))
 
+    ),
     Aquarius(
-        date -> (date.getMonthValue() == 1 && date.getDayOfMonth() >= 20
-            && date.getDayOfMonth() <= 31),
-        date -> (date.getMonthValue() == 2 && date.getDayOfMonth() >= 1
-            && date.getDayOfMonth() <= 17)
-    ),
+        new Pair(MonthDay.of(1, 20), MonthDay.of(1, 31)),
+        new Pair(MonthDay.of(2, 1), MonthDay.of(2, 17))
 
+    ),
     Pisces(
-        date -> (date.getMonthValue() == 2 && date.getDayOfMonth() >= 18
-            && date.getDayOfMonth() <= 29),
-        date -> (date.getMonthValue() == 3 && date.getDayOfMonth() >= 1
-            && date.getDayOfMonth() <= 19)
+        new Pair(MonthDay.of(2, 18), MonthDay.of(2, 29)),
+        new Pair(MonthDay.of(3, 1), MonthDay.of(3, 19))
     ),
     Aries(
-        date -> (date.getMonthValue() == 3 && date.getDayOfMonth() >= 20
-            && date.getDayOfMonth() <= 31),
-        date -> (date.getMonthValue() == 4 && date.getDayOfMonth() >= 1
-            && date.getDayOfMonth() <= 19)
+        new Pair(MonthDay.of(3, 20), MonthDay.of(3, 31)),
+        new Pair(MonthDay.of(4, 1), MonthDay.of(4, 19))
     ),
     Taurus(
-        date -> (date.getMonthValue() == 4 && date.getDayOfMonth() >= 20
-            && date.getDayOfMonth() <= 30),
-        date -> (date.getMonthValue() == 5 && date.getDayOfMonth() >= 1
-            && date.getDayOfMonth() <= 20)
+        new Pair(MonthDay.of(4, 20), MonthDay.of(4, 30)),
+        new Pair(MonthDay.of(5, 1), MonthDay.of(5, 20))
     ),
     Gemini(
-        date -> (date.getMonthValue() == 5 && date.getDayOfMonth() >= 21
-            && date.getDayOfMonth() <= 31),
-        date -> (date.getMonthValue() == 6 && date.getDayOfMonth() >= 1
-            && date.getDayOfMonth() <= 20)
+        new Pair(MonthDay.of(5, 21), MonthDay.of(5, 31)),
+        new Pair(MonthDay.of(6, 1), MonthDay.of(6, 20))
     ),
     Cancer(
-        date -> (date.getMonthValue() == 6 && date.getDayOfMonth() >= 21
-            && date.getDayOfMonth() <= 30),
-        date -> (date.getMonthValue() == 7 && date.getDayOfMonth() >= 1
-            && date.getDayOfMonth() <= 22)
-    ), Leo(
-        date -> (date.getMonthValue() == 7 && date.getDayOfMonth() >= 23
-            && date.getDayOfMonth() <= 31),
-        date -> (date.getMonthValue() == 8 && date.getDayOfMonth() >= 1
-            && date.getDayOfMonth() <= 22)
-    ), Virgo(
-        date -> (date.getMonthValue() == 8 && date.getDayOfMonth() >= 23
-            && date.getDayOfMonth() <= 31),
-        date -> (date.getMonthValue() == 9 && date.getDayOfMonth() >= 1
-            && date.getDayOfMonth() <= 22)
-    ), Libra(
-        date -> (date.getMonthValue() == 9 && date.getDayOfMonth() >= 23
-            && date.getDayOfMonth() <= 30),
-        date -> (date.getMonthValue() == 10 && date.getDayOfMonth() >= 1
-            && date.getDayOfMonth() <= 22)
-    ), Scorpio(
-        date -> (date.getMonthValue() == 10 && date.getDayOfMonth() >= 23
-            && date.getDayOfMonth() <= 31),
-        date -> (date.getMonthValue() == 11 && date.getDayOfMonth() >= 1
-            && date.getDayOfMonth() <= 21)
-    ), Sagittarius(
-        date -> (date.getMonthValue() == 11 && date.getDayOfMonth() >= 22
-            && date.getDayOfMonth() <= 30),
-        date -> (date.getMonthValue() == 12 && date.getDayOfMonth() >= 1
-            && date.getDayOfMonth() <= 21)
-    );
+        new Pair(MonthDay.of(6, 21), MonthDay.of(6, 30)),
+        new Pair(MonthDay.of(7, 1), MonthDay.of(7, 22))
+    ),
+    Leo(
+        new Pair(MonthDay.of(7, 23), MonthDay.of(7, 31)),
+        new Pair(MonthDay.of(8, 1), MonthDay.of(8, 22))
+    ),
+    Virgo(
+        new Pair(MonthDay.of(8, 23), MonthDay.of(8, 31)),
+        new Pair(MonthDay.of(9, 1), MonthDay.of(9, 22))
+    ),
+    Libra(
+        new Pair(MonthDay.of(9, 23), MonthDay.of(9, 30)),
+        new Pair(MonthDay.of(10, 1), MonthDay.of(10, 22))
+    ),
+    Scorpio(
+        new Pair(MonthDay.of(10, 23), MonthDay.of(10, 31)),
+        new Pair(MonthDay.of(11, 1), MonthDay.of(11, 21))
+    ),
+    Sagittarius(
+        new Pair(MonthDay.of(11, 22), MonthDay.of(11, 30)),
+        new Pair(MonthDay.of(12, 1), MonthDay.of(12, 21))
+    ),;
 
 
-    private Predicate<LocalDate> verifiers[];
+    private Pair[] dates;
 
-    ZodiacSigns(Predicate<LocalDate>... verifiers) {
-        this.verifiers = verifiers;
+    ZodiacSigns(Pair... dates) {
+        this.dates = dates;
+    }
+
+    public Optional<ZodiacSigns> match(int month, int day) {
+
+        return Optional.empty();
+    }
+
+    public Pair[] getDates() {
+        return dates;
+    }
+
+
+    public static final class Pair {
+
+        MonthDay left, right;
+
+        private Pair(MonthDay left, MonthDay right) {
+            this.left = left;
+            this.right = right;
+        }
     }
 
 }
