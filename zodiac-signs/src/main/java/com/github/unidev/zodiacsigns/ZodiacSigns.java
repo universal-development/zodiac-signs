@@ -45,7 +45,13 @@ public enum ZodiacSigns {
     ), Libra(
         date -> (date.getMonthValue() == 9 && date.getDayOfMonth() >= 23 && date.getDayOfMonth() <= 30),
         date -> (date.getMonthValue() == 10 && date.getDayOfMonth() >= 1 && date.getDayOfMonth() <= 22)
-    ), Scorpio, Sagittarius;
+    ), Scorpio(
+        date -> (date.getMonthValue() == 10 && date.getDayOfMonth() >= 23 && date.getDayOfMonth() <= 31),
+        date -> (date.getMonthValue() == 11 && date.getDayOfMonth() >= 1 && date.getDayOfMonth() <= 21)
+    ), Sagittarius(
+        date -> (date.getMonthValue() == 11 && date.getDayOfMonth() >= 22 && date.getDayOfMonth() <= 30),
+        date -> (date.getMonthValue() == 12 && date.getDayOfMonth() >= 1 && date.getDayOfMonth() <= 21)
+    );
 
 
     private Predicate<LocalDate> verifiers[];
