@@ -1,5 +1,6 @@
 package com.github.unidev.zodiacsigns;
 
+import java.time.Month;
 import java.time.MonthDay;
 import java.util.Optional;
 
@@ -65,8 +66,8 @@ public enum ZodiacSign {
         this.dates = dates;
     }
 
-    public boolean match(MonthDay monthDay, int day) {
-        return match(monthDay.getMonthValue(), day);
+    public boolean match(Month monthDay, int day) {
+        return match(monthDay.getValue(), day);
     }
 
     /**
@@ -103,8 +104,8 @@ public enum ZodiacSign {
      * Match Zodiac sign by month / day
      * @return Return matched sign
      */
-    public static Optional<ZodiacSign> matchSign(MonthDay monthDay, int day) {
-        return matchSign(monthDay.getMonthValue(), day);
+    public static Optional<ZodiacSign> matchSign(Month monthDay, int day) {
+        return matchSign(monthDay.getValue(), day);
     }
 
     /**
