@@ -1,11 +1,12 @@
 package com.github.unidev.zodiacsigns;
 
 import java.time.MonthDay;
+import java.util.Optional;
 
 /**
  * Zodiac signs enum.
  */
-public enum ZodiacSigns {
+public enum ZodiacSign {
     Capricorn(
         new Pair(MonthDay.of(12, 22), MonthDay.of(12, 31)),
         new Pair(MonthDay.of(1, 1), MonthDay.of(1, 19))
@@ -60,10 +61,19 @@ public enum ZodiacSigns {
 
     private Pair[] dates;
 
-    ZodiacSigns(Pair... dates) {
+    ZodiacSign(Pair... dates) {
         this.dates = dates;
     }
 
+    public boolean match(MonthDay monthDay, int day) {
+        return match(monthDay.getMonthValue(), day);
+    }
+
+    /**
+     * Check if sign match to provided month / date
+     *
+     * @return true - sign match, false - otherwise.
+     */
     public boolean match(int month, int day) {
 
         for (Pair date : dates) {
@@ -81,14 +91,40 @@ public enum ZodiacSigns {
         return false;
     }
 
+    /**
+     * Fetch Zodiac sign date pairs.
+     */
     public Pair[] getDates() {
         return dates;
     }
 
 
+    /**
+     * Match Zodiac sign by month / day
+     * @return Return matched sign
+     */
+    public static Optional<ZodiacSign> matchSign(MonthDay monthDay, int day) {
+        return matchSign(monthDay.getMonthValue(), day);
+    }
+
+    /**
+     * Match Zodiac sign by month / day
+     * @return Return matched sign
+     */
+    public static Optional<ZodiacSign> matchSign(int month, int day) {
+        for (ZodiacSign sign : ZodiacSign.values()) {
+            if (sign.match(month, day)) {
+                return Optional.of(sign);
+            }
+        }
+
+        return Optional.empty();
+    }
+
     public static final class Pair {
 
-        private final MonthDay left, right;
+        private final MonthDay left;
+        private final MonthDay right;
 
         private Pair(MonthDay left, MonthDay right) {
             this.left = left;

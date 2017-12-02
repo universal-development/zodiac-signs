@@ -9,7 +9,7 @@ public class ZodiacSignsTest {
 
     @Test
     public void testLeoMatching() {
-        assertTrue(ZodiacSigns.Leo.match(7, 25));
-        assertFalse(ZodiacSigns.Leo.match(7, 19));
+        assertTrue(ZodiacSign.Leo.match(7, 25));
+        assertFalse(ZodiacSign.Leo.match(7, 19));
     }
 }
