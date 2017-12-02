@@ -28,7 +28,24 @@ public enum ZodiacSigns {
     Taurus(
         date -> (date.getMonthValue() == 4 && date.getDayOfMonth() >= 20 && date.getDayOfMonth() <= 30),
         date -> (date.getMonthValue() == 5 && date.getDayOfMonth() >= 1 && date.getDayOfMonth() <= 20)
-    ), Gemini, Cancer, Leo, Virgo, Libra, Scorpio, Sagittarius;
+    ),
+    Gemini(
+        date -> (date.getMonthValue() == 5 && date.getDayOfMonth() >= 21 && date.getDayOfMonth() <= 31),
+        date -> (date.getMonthValue() == 6 && date.getDayOfMonth() >= 1 && date.getDayOfMonth() <= 20)
+    ),
+    Cancer(
+        date -> (date.getMonthValue() == 6 && date.getDayOfMonth() >= 21 && date.getDayOfMonth() <= 30),
+        date -> (date.getMonthValue() == 7 && date.getDayOfMonth() >= 1 && date.getDayOfMonth() <= 22)
+    ),Leo(
+        date -> (date.getMonthValue() == 7 && date.getDayOfMonth() >= 23 && date.getDayOfMonth() <= 31),
+        date -> (date.getMonthValue() == 8 && date.getDayOfMonth() >= 1 && date.getDayOfMonth() <= 22)
+    ), Virgo(
+        date -> (date.getMonthValue() == 8 && date.getDayOfMonth() >= 23 && date.getDayOfMonth() <= 31),
+        date -> (date.getMonthValue() == 9 && date.getDayOfMonth() >= 1 && date.getDayOfMonth() <= 22)
+    ), Libra(
+        date -> (date.getMonthValue() == 9 && date.getDayOfMonth() >= 23 && date.getDayOfMonth() <= 30),
+        date -> (date.getMonthValue() == 10 && date.getDayOfMonth() >= 1 && date.getDayOfMonth() <= 22)
+    ), Scorpio, Sagittarius;
 
 
     private Predicate<LocalDate> verifiers[];
