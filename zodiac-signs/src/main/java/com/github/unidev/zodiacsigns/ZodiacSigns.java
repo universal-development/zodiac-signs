@@ -24,9 +24,11 @@ public enum ZodiacSigns {
     Aries(
         date -> (date.getMonthValue() == 3 && date.getDayOfMonth() >= 20 && date.getDayOfMonth() <= 31),
         date -> (date.getMonthValue() == 4 && date.getDayOfMonth() >= 1 && date.getDayOfMonth() <= 19)
-    )
-
-    , Taurus, Gemini, Cancer, Leo, Virgo, Libra, Scorpio, Sagittarius;
+    ),
+    Taurus(
+        date -> (date.getMonthValue() == 4 && date.getDayOfMonth() >= 20 && date.getDayOfMonth() <= 30),
+        date -> (date.getMonthValue() == 5 && date.getDayOfMonth() >= 1 && date.getDayOfMonth() <= 20)
+    ), Gemini, Cancer, Leo, Virgo, Libra, Scorpio, Sagittarius;
 
 
     private Predicate<LocalDate> verifiers[];
