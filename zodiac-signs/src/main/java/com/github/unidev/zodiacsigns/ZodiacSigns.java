@@ -1,7 +1,6 @@
 package com.github.unidev.zodiacsigns;
 
 import java.time.MonthDay;
-import java.util.Optional;
 
 /**
  * Zodiac signs enum.
@@ -65,9 +64,21 @@ public enum ZodiacSigns {
         this.dates = dates;
     }
 
-    public Optional<ZodiacSigns> match(int month, int day) {
+    public boolean match(int month, int day) {
 
-        return Optional.empty();
+        for (Pair date : dates) {
+            MonthDay left = date.getLeft();
+            MonthDay right = date.getRight();
+
+            if (left.getMonthValue() == month && right.getMonthValue() == month) {
+                if (day >= left.getDayOfMonth() && day <= right.getDayOfMonth()) {
+                    return true;
+                }
+            }
+
+        }
+
+        return false;
     }
 
     public Pair[] getDates() {
@@ -77,11 +88,19 @@ public enum ZodiacSigns {
 
     public static final class Pair {
 
-        MonthDay left, right;
+        private final MonthDay left, right;
 
         private Pair(MonthDay left, MonthDay right) {
             this.left = left;
             this.right = right;
+        }
+
+        public MonthDay getLeft() {
+            return left;
+        }
+
+        public MonthDay getRight() {
+            return right;
         }
     }
 
