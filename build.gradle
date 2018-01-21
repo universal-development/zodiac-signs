@@ -1,6 +1,6 @@
 subprojects {
     group = 'com.github.unidev.zodiacsigns'
-    version = '0.0.1-SNAPSHOT'
+    version = '0.0.1'
 
     apply plugin: 'maven'
     apply plugin: 'java'
